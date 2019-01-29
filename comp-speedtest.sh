@@ -8,7 +8,7 @@ set -o errexit
 #### Dépendances à installer avant de lancer le script
 # sudo apt install speedtest-cli
 
-#### Ficheir de log au format .csv
+#### Fichier de log au format .csv
 FILE_LOG=./`date +%Y%m%d-%H%M`-comp-speedtest.csv
 
 #### Fonction de test de débit
