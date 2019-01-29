@@ -3,7 +3,7 @@ set -o errexit
 # Comparateur de serveurs SpeedTest
 # https://lafibre.info/tester-son-debit/comp-speedtest/
 # Vivien GUEANT / LaFibre.info
-# Version du 28 janvier 2019
+# Version 1.0
 
 #### Dépendances à installer avant de lancer le script
 # sudo apt install speedtest-cli
