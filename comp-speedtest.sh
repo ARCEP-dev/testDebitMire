@@ -21,7 +21,7 @@ speedtest ()
    if [[ $debit -ge 1000000 ]];
    then
       local latence=$(echo "${resultat}" | cut -d',' -f 5 | cut -d'.' -f 1)
-      echo ": $((${debit}/1000000)) Mb/s - ${latence} ms"
+      echo ": $((debit/1000000)) Mb/s - ${latence} ms"
    else
       echo ": Échec du test" 2>/dev/null
    fi
