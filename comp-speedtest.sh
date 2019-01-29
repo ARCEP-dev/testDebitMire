@@ -55,9 +55,13 @@ echo -n "Test n° 9 / 88 Cloudwatt      - Paris      "
 speedtest 5582
 echo -n "Test n°10 / 88 Télécom Paris  - Paris      "
 speedtest 11977
-echo -n "Test n°11 / 88 Stella Telecom - Courbevoie "
+echo -n "Test n°11 / 88 Extragornax    - Paris      "
+speedtest 22902
+echo -n "Test n°12 / 88 Host-Heberg    - Paris      "
+speedtest 22086
+echo -n "Test n°13 / 88 Stella Telecom - Courbevoie "
 speedtest 14821
-echo -n "Test n°12 / 88 Ozone          - Courbevoie "
+echo -n "Test n°14 / 88 Ozone          - Courbevoie "
 speedtest 11644
 echo -n "Test n°13 / 88 Scaleway/Online- Vitry/Seine"
 speedtest 5022
