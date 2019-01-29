@@ -14,13 +14,13 @@ readonly FILE_LOG=./`date +%Y%m%d-%H%M`-comp-speedtest.csv
 #### Fonction de test de débit
 speedtest ()
 {
-   speedtest-cli --no-upload --csv --timeout 1 --secure --server $1 2>&1 | cut -d',' -f 1,2,3,4,6,7 >>${FILE_LOG} 2>/dev/null
-   local resultat=$(tail -n1 ${FILE_LOG})
-   local debit=$(echo $resultat | cut -d',' -f 6 | cut -d'.' -f 1)
+   speedtest-cli --no-upload --csv --timeout 1 --secure --server $1 2>&1 | cut -d',' -f 1,2,3,4,6,7 >> "${FILE_LOG}" 2>/dev/null
+   local resultat=$(tail -n1 "${FILE_LOG}")
+   local debit=$(echo "${resultat}" | cut -d',' -f 6 | cut -d'.' -f 1)
    if [ "$debit" -ge 1000000 ];
    then
-      local latence=$(echo $resultat | cut -d',' -f 5 | cut -d'.' -f 1)
-      echo ": $(($debit/1000000)) Mb/s - $latence ms"
+      local latence=$(echo "${resultat}" | cut -d',' -f 5 | cut -d'.' -f 1)
+      echo ": $(($debit/1000000)) Mb/s - ${latence} ms"
    else
       echo ": Échec du test" 2>/dev/null
    fi
@@ -30,7 +30,7 @@ speedtest ()
 echo "Merci de ne pas utiliser votre PC pendant les tests"
 
 # Gérer l'en-tête du fichier CSV
-speedtest-cli --csv-header >>${FILE_LOG}
+speedtest-cli --csv-header >> "${FILE_LOG}"
 #echo -n "En-tête CSV: "
 #tail -n1 ${FILE_LOG}
 
