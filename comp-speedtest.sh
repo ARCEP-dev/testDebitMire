@@ -15,14 +15,19 @@ FILE_LOG=./`date +%Y%m%d-%H%M`-comp-speedtest.csv
 speedtest ()
 {
    speedtest-cli --no-upload --csv --timeout 1 --secure --server $1 2>&1 | cut -d',' -f 1,2,3,4,6,7 >>${FILE_LOG} 2>/dev/null
-   resultat=$(tail -n1 ${FILE_LOG}) 2>/dev/null
-   debit=$(echo $resultat | cut -d',' -f 6 | cut -d'.' -f 1) 2>/dev/null
-   if [ "$debit" -ge 1000000 ]; 2>/dev/null
+   resultat=$(tail -n1 ${FILE_LOG})
+   debit=$(echo $resultat | cut -d',' -f 6 | cut -d'.' -f 1)
+   if expr "$debit" : "^[0-9][0-9]*$" >/dev/null
    then
-      latence=$(echo $resultat | cut -d',' -f 5 | cut -d'.' -f 1) 2>/dev/null
-      echo ": $(($debit/1000000)) Mb/s - $latence ms"
+      latence=$(echo $resultat | cut -d',' -f 5 | cut -d'.' -f 1)
+      if [ "$debit" -ge 1000000 ];
+      then
+         echo ": $(($debit/1000000)) Mb/s - $latence ms"
+      else
+         echo ": Échec débit nul - $latence ms"
+      fi
    else
-      echo ": Échec du test" 2>/dev/null
+      echo ": Échec serveur indisponible"
    fi
 }
 
