@@ -9,7 +9,7 @@ set -o errexit
 # sudo apt install speedtest-cli
 
 #### Fichier de log au format .csv
-readonly FILE_LOG=./`date +%Y%m%d-%H%M`-comp-speedtest.csv
+readonly FILE_LOG=./$(date +%Y%m%d-%H%M)-comp-speedtest.csv
 
 #### Fonction de test de débit
 speedtest ()
