@@ -2,50 +2,31 @@
 set -o errexit
 # Comparateur de serveurs SpeedTest sous license Apache version 2.0
 # https://lafibre.info/tester-son-debit/comp-speedtest/
-<<<<<<< HEAD
 # Vivien GUEANT / LaFibre.info
 # Version 1.01
-=======
-# Vivien GUEANT / LaFibre.info / Contact: https://twitter.com/lafibreinfo
-# Version 1.00 - 29 janvier 2018
->>>>>>> f205c1e18a2386f1eb8cf98352873f0997280d00
 
 #### Dépendances à installer avant de lancer le script
 # sudo apt install speedtest-cli
 
 #### Fichier de log au format .csv
-<<<<<<< HEAD
 readonly FILE_LOG=./$(date +%Y%m%d-%H%M)-comp-speedtest.csv
-=======
-FILE_LOG=./`date +%Y%m%d-%H%M`-comp-speedtest.csv
->>>>>>> f205c1e18a2386f1eb8cf98352873f0997280d00
 
 #### Fonction de test de débit
 speedtest ()
 {
-<<<<<<< HEAD
    local server="$1"
    speedtest-cli --no-upload --csv --timeout 1 --secure --server "${server}" 2>&1 | cut -d',' -f 1,2,3,4,6,7 >> "${FILE_LOG}" 2>/dev/null
    local resultat=$(tail -n1 "${FILE_LOG}")
    local debit=$(echo "${resultat}" | cut -d',' -f 6 | cut -d'.' -f 1)
-   if [[ $debit -ge 1000000 ]];
-   then
-      local latence=$(echo "${resultat}" | cut -d',' -f 5 | cut -d'.' -f 1)
-      echo ": $((debit/1000000)) Mb/s - ${latence} ms"
-=======
-   speedtest-cli --no-upload --csv --timeout 1 --secure --server $1 2>&1 | cut -d',' -f 1,2,3,4,6,7 >>${FILE_LOG} 2>/dev/null
-   resultat=$(tail -n1 ${FILE_LOG})
-   debit=$(echo $resultat | cut -d',' -f 6 | cut -d'.' -f 1)
    if expr "$debit" : "^[0-9][0-9]*$" >/dev/null
    then
-      latence=$(echo $resultat | cut -d',' -f 5 | cut -d'.' -f 1)
-      if [ "$debit" -ge 1000000 ];
+      local latence=$(echo "${resultat}" | cut -d',' -f 5 | cut -d'.' -f 1)
+      if [[ $debit -ge 1000000 ]];
       then
-         echo ": $(($debit/1000000)) Mb/s - $latence ms"
+         echo ": $((debit/1000000)) Mb/s - ${latence} ms"
       else
-         echo ": Échec débit nul - $latence ms"
+         echo ": Échec débit nul - ${latence} ms"
       fi
->>>>>>> f205c1e18a2386f1eb8cf98352873f0997280d00
    else
       echo ": Échec serveur indisponible"
    fi
@@ -55,13 +36,7 @@ speedtest ()
 echo "Merci de ne pas utiliser votre PC pendant les tests"
 
 # Gérer l'en-tête du fichier CSV
-<<<<<<< HEAD
 speedtest-cli --csv-header >> "${FILE_LOG}"
-#echo -n "En-tête CSV: "
-#tail -n1 ${FILE_LOG}
-=======
-speedtest-cli --csv-header >>${FILE_LOG}
->>>>>>> f205c1e18a2386f1eb8cf98352873f0997280d00
 
 # Tests de débit
 echo -n "Test n° 1 / 91 Orange         - Paris      "
