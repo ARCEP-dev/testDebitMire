@@ -47,16 +47,15 @@ if (( $version < 2 )); then
 fi
 
 # Gérer l'en-tête du fichier CSV
-echo speedtest-cli --csv-header >> "${FILE_LOG}"
+speedtest-cli --csv-header >> "${FILE_LOG}"
 
 # Tests de débit
 
 # 1. chargement de la liste des serveurs
 
-INPUT=${1:-/dev/stdin}
-[ ! -f $INPUT ] && { echo "$1 fichier liste des serveurs non trouvé "; exit 99; }
+[ $# -ge 1 -a -f "$1" ] && INPUT="$1" || INPUT="-"
 
-readarray -t servers < $INPUT
+readarray -t servers < <(cat "$INPUT")
 
 maxn="${#servers[@]}"
 
